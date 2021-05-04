@@ -123,3 +123,12 @@ h2 {
     border-bottom-right-radius: 1rem;
   }
 }
+
+input[type="range"] {
+  appearance: none;
+  // margin: 1rem 0;
+  // width: 100%;
+  // position: relative;
+  border-radius: 1rem;
+  cursor: pointer;
+}

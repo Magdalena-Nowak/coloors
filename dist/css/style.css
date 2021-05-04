@@ -184,4 +184,12 @@ h2 {
   border-top-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
+
+input[type="range"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 1rem;
+  cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */
