@@ -17,6 +17,7 @@ h1 {
 h2 {
   font-size: 1.8rem;
 }
+
 .container__library,
 .container__save,
 .container__copy {
@@ -49,7 +50,7 @@ h2 {
     border: none;
     margin: 8vh 0;
     background-color: transparent;
-    color: white;
+    // color: white;
     font-size: 3rem;
     cursor: pointer;
   }
