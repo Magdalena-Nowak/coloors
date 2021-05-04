@@ -19,13 +19,24 @@ function generateHex() {
 }
 
 function randomColors() {
-  colorDivs.forEach((div) => {
+  colorDivs.forEach((div, index) => {
     const hexText = div.children[0];
     const randomColor = generateHex();
 
     div.style.backgroundColor = randomColor;
     hexText.innerText = randomColor;
+    checkTextContrast(randomColor, hexText);
   });
+}
+
+function checkTextContrast(color, hex) {
+  const luminColor = color.get("lab.l");
+  // DODAĆ OPCJĘ ZMIANY KOLORÓW IKON RAZEM Z TEKSTEM
+  if (luminColor < 50) {
+    hex.style.color = "white";
+  } else {
+    hex.style.color = "black";
+  }
 }
 
 randomColors();
