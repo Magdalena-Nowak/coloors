@@ -88,6 +88,9 @@ function colorizeSliders(color, hue, brightness, saturation) {
     0
   )}, ${midBright}, ${scaleBright(1)}`;
   hue.style.backgroundImage = `linear-gradient(to right, black,  red, orange, yellow, green, cyan, blue, indigo, violet, grey)`;
+  saturation.value = color.hsl()[1];
+  brightness.value = color.hsl()[2];
+  hue.value = color.hsl()[0];
 }
 
 function hslControls(e) {
@@ -108,6 +111,7 @@ function hslControls(e) {
     .set("hsl.h", hue.value);
 
   colorDivs[index].style.backgroundColor = color;
+  colorizeSliders(color, hue, brightness, saturation);
 }
 
 function updateTextUI(index) {
