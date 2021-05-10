@@ -2,6 +2,8 @@
 const colorDivs = document.querySelectorAll(".color");
 const sliders = document.querySelectorAll('input[type="range"]');
 let initialColors;
+const currentHexes = document.querySelectorAll(".color--header");
+const popup = document.querySelector(".container__copy");
 // Add event listeners
 
 sliders.forEach((slider) => {
@@ -14,15 +16,21 @@ colorDivs.forEach((div, index) => {
   });
 });
 
+currentHexes.forEach((hex) => {
+  hex.addEventListener("click", () => {
+    copyToClipboard(hex);
+  });
+});
+
+popup.addEventListener("transitionend", () => {
+  const popupBox = popup.children[0];
+  popup.classList.remove("active");
+  popupBox.classList.remove("active");
+});
+
 // Generate new color in HEX
 
 function generateHex() {
-  //   const letters = "0123456789ABCDEF";
-  //   let hash = "#";
-  //   for (let i = 0; i < 6; i++) {
-  //     hash += letters[Math.floor(Math.random() * 16)];
-  //   }
-  //   return hash;
   // ZAMIANA PĘTLI NA WERSJĘ Z BIBLIOTEKĄ CHROMA.JS
   const hexColor = chroma.random();
   return hexColor;
@@ -122,6 +130,19 @@ function updateTextUI(index) {
   const lockBtn = activeDiv.querySelector(".controls--lock");
   textHex.innerText = color.hex();
   checkTextContrast(color, textHex, adjustBtn, lockBtn);
+}
+
+function copyToClipboard(hex) {
+  const el = document.createElement("textarea");
+  el.value = hex.innerText;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand("copy");
+  document.body.removeChild(el);
+  console.log(el);
+  const popupBox = popup.children[0];
+  popup.classList.add("active");
+  popupBox.classList.add("active");
 }
 
 randomColors();
