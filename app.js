@@ -4,6 +4,9 @@ const sliders = document.querySelectorAll('input[type="range"]');
 let initialColors;
 const currentHexes = document.querySelectorAll(".color--header");
 const popup = document.querySelector(".container__copy");
+const adjustBtn = document.querySelectorAll(".controls--adjust");
+const slidersContainer = document.querySelectorAll(".sliders");
+const slidersClose = document.querySelectorAll("sliders--close");
 // Add event listeners
 
 sliders.forEach((slider) => {
@@ -27,6 +30,18 @@ popup.addEventListener("transitionend", () => {
   popup.classList.remove("active");
   popupBox.classList.remove("active");
 });
+
+adjustBtn.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    openAdjustmentPanel(index);
+  });
+});
+
+// slidersClose.forEach((btn, number) => {
+//   btn.addEventListener("click", () => {
+//     closeAdjustmentPanel(number);
+//   });
+// }); NIE DZIAŁA ????????
 
 // Generate new color in HEX
 
@@ -144,5 +159,12 @@ function copyToClipboard(hex) {
   popup.classList.add("active");
   popupBox.classList.add("active");
 }
+function openAdjustmentPanel(index) {
+  slidersContainer[index].classList.toggle("active");
+}
+
+// function closeAdjustmentPanel(number) {
+//   slidersContainer[number].classList.remove("active");
+// } NIE DZIAŁA ????
 
 randomColors();

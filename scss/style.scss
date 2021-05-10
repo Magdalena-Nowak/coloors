@@ -74,7 +74,7 @@ h2 {
   padding: 1rem;
   position: absolute;
   bottom: 0;
-  //   transform: translateY(100%);
+  transform: translateY(100%);
   transition: all 0.5s ease-in-out;
   .sliders--close {
     background-color: rgb(17, 27, 58);
@@ -84,17 +84,16 @@ h2 {
     position: absolute;
     top: 0;
     right: 0;
-    transform: translate(0px, -100%);
+    // transform: translate(0px, -100%);
     // border-bottom-left-radius: 2rem;
     border-top-left-radius: 0.8rem;
-    // border-bottom-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
     cursor: pointer;
-    pointer-events: none;
   }
   &.active {
     opacity: 1;
     pointer-events: all;
-    transform: translate(0);
+    transform: translateY(0);
   }
   .sliders--hue,
   .sliders--bright,

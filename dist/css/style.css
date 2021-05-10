@@ -85,6 +85,7 @@ h2 {
   padding: 1rem;
   position: absolute;
   bottom: 0;
+  transform: translateY(100%);
   transition: all 0.5s ease-in-out;
 }
 
@@ -96,16 +97,15 @@ h2 {
   position: absolute;
   top: 0;
   right: 0;
-  transform: translate(0px, -100%);
   border-top-left-radius: 0.8rem;
+  border-bottom-right-radius: 0.8rem;
   cursor: pointer;
-  pointer-events: none;
 }
 
 .sliders.active {
   opacity: 1;
   pointer-events: all;
-  transform: translate(0);
+  transform: translateY(0);
 }
 
 .sliders .sliders--hue,
