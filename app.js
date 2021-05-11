@@ -7,6 +7,8 @@ const popup = document.querySelector(".container__copy");
 const adjustBtn = document.querySelectorAll(".controls--adjust");
 const slidersContainer = document.querySelectorAll(".sliders");
 const slidersClose = document.querySelectorAll("sliders--close");
+const refreshBtn = document.querySelector(".refresh");
+const lockedBtn = document.querySelectorAll(".controls--lock");
 // Add event listeners
 
 sliders.forEach((slider) => {
@@ -37,6 +39,16 @@ adjustBtn.forEach((button, index) => {
   });
 });
 
+lockedBtn.forEach((button, index) => {
+  button.addEventListener("click", () => lockChangeColor(index));
+});
+
+// lockedBtn.forEach((button, index) => {
+//   button.addEventListener("click", () => unlockChangeColor(index));
+// });
+
+refreshBtn.addEventListener("click", randomColors);
+
 // slidersClose.forEach((btn, number) => {
 //   btn.addEventListener("click", () => {
 //     closeAdjustmentPanel(number);
@@ -57,10 +69,15 @@ function randomColors() {
     const hexText = div.children[0];
     const randomColor = generateHex();
 
+    if (div.classList.contains("locked")) {
+      initialColors.push(hexText.innerText);
+      return;
+    } else {
+      initialColors.push(chroma(randomColor).hex());
+    }
+
     div.style.backgroundColor = randomColor;
     hexText.innerText = randomColor;
-
-    initialColors.push(chroma(randomColor).hex());
 
     const iconColors = div.querySelectorAll("button");
     const adjustBtn = iconColors[0];
@@ -163,6 +180,18 @@ function openAdjustmentPanel(index) {
   slidersContainer[index].classList.toggle("active");
 }
 
+function lockChangeColor(index) {
+  colorDivs[index].classList.toggle("locked");
+  if (colorDivs[index].classList.contains("locked") == true) {
+    lockedBtn[index].innerHTML = `<i class="fas fa-lock"></i>`;
+  } else {
+    lockedBtn[index].innerHTML = `<i class="fas fa-lock-open"></i>`;
+  }
+}
+// function unlockChangeColor(index) {
+//   colorDivs[index].classList.remove("locked");
+// lockedBtn[index].innerHTML = `<i class="fas fa-lock-open"></i>`;
+// }
 // function closeAdjustmentPanel(number) {
 //   slidersContainer[number].classList.remove("active");
 // } NIE DZIAŁA ????
