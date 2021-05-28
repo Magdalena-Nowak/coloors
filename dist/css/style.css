@@ -10,8 +10,10 @@ html {
   letter-spacing: 0.2rem;
 }
 
-button {
+button,
+input[type="text"] {
   font-family: "Yanone Kaffeesatz", sans-serif;
+  letter-spacing: 0.2rem;
 }
 
 h1 {
@@ -22,22 +24,54 @@ h2 {
   font-size: 1.8rem;
 }
 
-.container__library,
-.container__save {
-  display: none;
+.panel--library,
+.panel--refresh,
+.panel--save,
+.save__submit {
+  color: white;
+  background-color: #111b3a;
+  border-top-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+  width: 12rem;
+  height: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel--library button,
+.panel--refresh button,
+.panel--save button,
+.save__submit button {
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 2rem;
+}
+
+.sliders, .sliders--close, .save__container,
+.library__container, .save__close, .copy__container--popup {
+  border-top-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 }
 
 .colors {
   height: 85vh;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
 }
 
 .color {
-  flex-grow: 2;
+  padding-bottom: 10%;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   position: relative;
   overflow: hidden;
@@ -45,61 +79,38 @@ h2 {
 
 .color .color--header {
   cursor: pointer;
-  margin: 8vh 0;
+  margin: 15% 0;
 }
 
 .color--controls {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1 0 20%;
 }
 
-.color--controls .controls--adjust,
-.color--controls .controls--lock {
+.controls--adjust,
+.controls--lock {
   border: none;
-  margin: 8vh 0;
   background-color: transparent;
   font-size: 3rem;
   cursor: pointer;
-}
-
-.fas {
-  pointer-events: none;
-}
-
-.controls--lock {
-  margin-top: 8rem;
 }
 
 .sliders {
   background: white;
   position: relative;
   width: 90%;
-  height: 30vh;
+  height: 35vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  border-top-left-radius: 2rem;
-  border-bottom-right-radius: 1rem;
-  padding: 1rem;
   position: absolute;
   bottom: 0;
   transform: translateY(100%);
   transition: all 0.5s ease-in-out;
-}
-
-.sliders .sliders--close {
-  background-color: #111b3a;
-  padding: 1rem;
-  color: white;
-  border: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-top-left-radius: 0.8rem;
-  border-bottom-right-radius: 0.8rem;
-  cursor: pointer;
 }
 
 .sliders.active {
@@ -114,31 +125,109 @@ h2 {
   width: 70%;
 }
 
-.panel {
-  display: flex;
-  justify-content: space-around;
-  padding-top: 4rem;
+.sliders--close {
+  background-color: #111b3a;
+  padding: 1.5rem;
+  color: white;
+  border: none;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  cursor: pointer;
 }
 
-.panel .panel--library,
-.panel .panel--refresh,
-.panel .panel--save {
+.panel {
+  height: 15vh;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 }
 
-.panel button {
-  margin-bottom: 2rem;
+.panel--library,
+.panel--refresh,
+.panel--save,
+.save__submit {
+  font-weight: 600;
+}
+
+.panel--library button,
+.panel--refresh button,
+.panel--save button,
+.save__submit button {
+  margin-bottom: 1rem;
+}
+
+.save__container,
+.library__container {
+  background-color: white;
+  width: 30%;
+  height: 40%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.save__container.active,
+.library__container.active {
+  display: flex;
+}
+
+.save__container--popup,
+.library__container--popup {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.save__container--popup .save__close,
+.save__container--popup .library__close,
+.library__container--popup .save__close,
+.library__container--popup .library__close {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
+.save__container--popup h2,
+.save__container--popup .save__name,
+.save__container--popup .save__submit,
+.library__container--popup h2,
+.library__container--popup .save__name,
+.library__container--popup .save__submit {
+  margin: 2rem 0;
   font-size: 2rem;
-  padding: 1rem 2rem;
-  border: none;
-  cursor: pointer;
+}
+
+.save__container--popup.active,
+.library__container--popup.active {
+  display: flex;
+}
+
+.save__container--popup input[type="text"],
+.library__container--popup input[type="text"] {
+  padding: 1rem 1rem;
+  width: 130%;
+}
+
+.save__close {
   background-color: #111b3a;
+  padding: 1.5rem;
   color: white;
-  border-top-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border: none;
+  position: absolute;
+  cursor: pointer;
+}
+
+.fas {
+  pointer-events: none;
 }
 
 input[type="range"] {
@@ -147,7 +236,7 @@ input[type="range"] {
   cursor: pointer;
 }
 
-.container__copy {
+.copy__container {
   position: fixed;
   top: 0;
   left: 0;
@@ -155,42 +244,41 @@ input[type="range"] {
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   opacity: 0;
   pointer-events: none;
 }
 
-.container__copy.active {
+.copy__container.active {
   opacity: 1;
   pointer-events: all;
 }
 
-.container__copy--popup {
+.copy__container--popup {
   min-width: 25%;
   min-height: 30%;
-  background-color: #f3f2f0;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 2rem;
-  border-bottom-right-radius: 2rem;
   transition: all 0.5s ease-in-out;
   transform: translateY(-2rem);
 }
 
-.container__copy--popup h2 {
+.copy__container--popup h2 {
   font-size: 2.2rem;
   margin-bottom: 3rem;
 }
 
-.container__copy--popup .fa-thumbs-up {
+.copy__container--popup .fa-thumbs-up {
   font-size: 4rem;
   color: #162552;
 }
 
-.container__copy--popup.active {
+.copy__container--popup.active {
   transform: translateY(0rem);
 }
 /*# sourceMappingURL=style.css.map */

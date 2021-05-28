@@ -3,12 +3,13 @@ const colorDivs = document.querySelectorAll(".color");
 const sliders = document.querySelectorAll('input[type="range"]');
 let initialColors;
 const currentHexes = document.querySelectorAll(".color--header");
-const popup = document.querySelector(".container__copy");
+const popup = document.querySelector(".copy__container");
 const adjustBtn = document.querySelectorAll(".controls--adjust");
 const slidersContainer = document.querySelectorAll(".sliders");
 const slidersClose = document.querySelectorAll("sliders--close");
 const refreshBtn = document.querySelector(".refresh");
 const lockedBtn = document.querySelectorAll(".controls--lock");
+let savedPalettes = [];
 // Add event listeners
 
 sliders.forEach((slider) => {
@@ -195,5 +196,22 @@ function lockChangeColor(index) {
 // function closeAdjustmentPanel(number) {
 //   slidersContainer[number].classList.remove("active");
 // } NIE DZIAŁA ????
+
+// Implement Save to palette and Local Storage
+
+const saveContainer = document.querySelector(".save__container");
+const submitSave = document.querySelector(".save__submit");
+const saveInput = document.querySelector(".save__name");
+const closeSave = document.querySelector(".save__close");
+const saveBtn = document.querySelector(".save");
+
+saveBtn.addEventListener("click", openPalette);
+
+function openPalette(e) {
+  const popup = saveContainer.children[0];
+  saveContainer.classList.add("active");
+  popup.classList.add("active");
+  console.log(popup);
+}
 
 randomColors();
