@@ -131,45 +131,6 @@ h2 {
     @extend %btn;
   }
 }
-.save__container,
-.library__container {
-  background-color: white;
-  width: 30%;
-  height: 40%;
-  @extend %borderRadius;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  @include flex(none, row, center, center);
-  &.active {
-    display: flex;
-  }
-}
-.save__container--popup,
-.library__container--popup {
-  @include flex(none, column, space-between, center);
-  padding-top: 2rem;
-  .save__close,
-  .library__close {
-    position: absolute;
-    top: 5%;
-    left: 5%;
-  }
-  h2,
-  .save__name,
-  .save__submit {
-    margin: 2rem 0;
-    font-size: 2rem;
-  }
-  &.active {
-    display: flex;
-  }
-  input[type="text"] {
-    padding: 1rem 1rem;
-    width: 130%;
-  }
-}
 
 .save__close {
   background-color: rgb(17, 27, 58);
@@ -191,7 +152,9 @@ input[type="range"] {
   cursor: pointer;
 }
 
-.copy__container {
+.copy__container,
+.save__container,
+.library__container {
   position: fixed;
   top: 0;
   left: 0;
@@ -206,8 +169,9 @@ input[type="range"] {
     pointer-events: all;
   }
 }
-
-.copy__container--popup {
+.copy__container--popup,
+.save__container--popup,
+.library__container--popup {
   min-width: 25%;
   min-height: 30%;
   background-color: white;
@@ -215,15 +179,24 @@ input[type="range"] {
   @extend %borderRadius;
   transition: all 0.5s ease-in-out;
   transform: translateY(-2rem);
-  h2 {
-    font-size: 2.2rem;
-    margin-bottom: 3rem;
+  .save__close,
+  .library__close {
+    position: absolute;
+    top: 5%;
+    left: 5%;
   }
-  .fa-thumbs-up {
-    font-size: 4rem;
-    color: rgb(22, 37, 82);
+  h2,
+  .save__name,
+  .save__submit {
+    margin: 2rem 0;
+    font-size: 2rem;
+  }
+  input[type="text"] {
+    padding: 1rem 1rem;
+    width: 60%;
   }
   &.active {
     transform: translateY(0rem);
+    opacity: 1;
   }
 }

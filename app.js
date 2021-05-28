@@ -6,7 +6,7 @@ const currentHexes = document.querySelectorAll(".color--header");
 const popup = document.querySelector(".copy__container");
 const adjustBtn = document.querySelectorAll(".controls--adjust");
 const slidersContainer = document.querySelectorAll(".sliders");
-const slidersClose = document.querySelectorAll("sliders--close");
+const slidersClose = document.querySelectorAll(".sliders--close");
 const refreshBtn = document.querySelector(".refresh");
 const lockedBtn = document.querySelectorAll(".controls--lock");
 let savedPalettes = [];
@@ -44,17 +44,17 @@ lockedBtn.forEach((button, index) => {
   button.addEventListener("click", () => lockChangeColor(index));
 });
 
-// lockedBtn.forEach((button, index) => {
-//   button.addEventListener("click", () => unlockChangeColor(index));
-// });
+lockedBtn.forEach((button, index) => {
+  button.addEventListener("click", () => unlockChangeColor(index));
+});
 
 refreshBtn.addEventListener("click", randomColors);
 
-// slidersClose.forEach((btn, number) => {
-//   btn.addEventListener("click", () => {
-//     closeAdjustmentPanel(number);
-//   });
-// }); NIE DZIAŁA ????????
+slidersClose.forEach((btn, number) => {
+  btn.addEventListener("click", () => {
+    closeAdjustmentPanel(number);
+  });
+});
 
 // Generate new color in HEX
 
@@ -189,13 +189,15 @@ function lockChangeColor(index) {
     lockedBtn[index].innerHTML = `<i class="fas fa-lock-open"></i>`;
   }
 }
-// function unlockChangeColor(index) {
-//   colorDivs[index].classList.remove("locked");
-// lockedBtn[index].innerHTML = `<i class="fas fa-lock-open"></i>`;
-// }
-// function closeAdjustmentPanel(number) {
-//   slidersContainer[number].classList.remove("active");
-// } NIE DZIAŁA ????
+
+function unlockChangeColor(index) {
+  colorDivs[index].classList.remove("locked");
+  lockedBtn[index].innerHTML = `<i class="fas fa-lock-open"></i>`;
+}
+
+function closeAdjustmentPanel(number) {
+  slidersContainer[number].classList.remove("active");
+}
 
 // Implement Save to palette and Local Storage
 
@@ -211,7 +213,14 @@ function openPalette(e) {
   const popup = saveContainer.children[0];
   saveContainer.classList.add("active");
   popup.classList.add("active");
-  console.log(popup);
+}
+
+closeSave.addEventListener("click", closePalette);
+
+function closePalette() {
+  const popup = saveContainer.children[0];
+  saveContainer.classList.remove("active");
+  popup.classList.remove("active");
 }
 
 randomColors();
