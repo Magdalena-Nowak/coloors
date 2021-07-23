@@ -122,15 +122,17 @@ h2 {
 }
 .panel--library,
 .panel--refresh,
-.panel--save,
-.save__submit {
+.panel--save {
   @extend %btnArea;
   font-weight: 600;
+  pointer-events: all;
   button {
     margin-bottom: 1rem;
+    pointer-events: none;
     @extend %btn;
   }
 }
+
 
 .save__close {
   background-color: rgb(17, 27, 58);

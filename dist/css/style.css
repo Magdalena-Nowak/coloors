@@ -26,8 +26,7 @@ h2 {
 
 .panel--library,
 .panel--refresh,
-.panel--save,
-.save__submit {
+.panel--save {
   color: white;
   background-color: #111b3a;
   border-top-left-radius: 1rem;
@@ -44,8 +43,7 @@ h2 {
 
 .panel--library button,
 .panel--refresh button,
-.panel--save button,
-.save__submit button {
+.panel--save button {
   border: none;
   background-color: transparent;
   color: white;
@@ -147,16 +145,16 @@ h2 {
 
 .panel--library,
 .panel--refresh,
-.panel--save,
-.save__submit {
+.panel--save {
   font-weight: 600;
+  pointer-events: all;
 }
 
 .panel--library button,
 .panel--refresh button,
-.panel--save button,
-.save__submit button {
+.panel--save button {
   margin-bottom: 1rem;
+  pointer-events: none;
 }
 
 .save__close {
