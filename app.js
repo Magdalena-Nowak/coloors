@@ -244,7 +244,7 @@ function savePalette() {
   preview.classList.add("small-preview");
   paletteObj.colors.forEach((smallColor) => {
     const smallDiv = document.createElement("div");
-    smallDiv.classList.add('preview-color');
+    smallDiv.classList.add("preview-color");
     preview.appendChild(smallDiv);
     smallDiv.style.backgroundColor = smallColor;
   });
@@ -252,6 +252,20 @@ function savePalette() {
   paletteBtn.classList.add("pick-palette-btn");
   paletteBtn.classList.add(paletteObj.nr);
   paletteBtn.innerText = "Select";
+
+  //Attach event to the btn
+
+  paletteBtn.addEventListener("click", (e) => {
+    closeLibrary();
+    const paletteIndex = e.target.classList[1];
+    initialColors = [];
+    savedPalettes[paletteIndex].colors.forEach((color, index) => {
+      initialColors.push(color);
+      colorDivs[index].style.backgroundColor = color;
+      const text = colorDivs[index].children[0];
+      updateTextUI(index);
+    });
+  });
 
   // Append to library
   palette.appendChild(title);
