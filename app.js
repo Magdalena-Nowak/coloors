@@ -185,8 +185,10 @@ function lockChangeColor(index) {
   colorDivs[index].classList.toggle("locked");
   if (colorDivs[index].classList.contains("locked") == true) {
     lockedBtn[index].innerHTML = `<i class="fas fa-lock"></i>`;
+    adjustBtns[index].style.pointerEvents = "none";
   } else {
     lockedBtn[index].innerHTML = `<i class="fas fa-lock-open"></i>`;
+    adjustBtns[index].style.pointerEvents = "all";
   }
 }
 
