@@ -26,7 +26,7 @@ h2 {
 
 .panel--library,
 .panel--refresh,
-.panel--save {
+.panel--save, .save__submit {
   color: white;
   background-color: #111b3a;
   border-top-left-radius: 1rem;
@@ -157,6 +157,10 @@ h2 {
   pointer-events: none;
 }
 
+.save__submit {
+  font-weight: 600;
+}
+
 .save__close {
   background-color: #111b3a;
   padding: 1.5rem;
@@ -225,17 +229,27 @@ input[type="range"] {
   left: 5%;
 }
 
-.copy__container--popup h2,
 .copy__container--popup .save__name,
 .copy__container--popup .save__submit,
-.save__container--popup h2,
 .save__container--popup .save__name,
 .save__container--popup .save__submit,
-.library__container--popup h2,
 .library__container--popup .save__name,
 .library__container--popup .save__submit {
   margin: 2rem 0;
   font-size: 2rem;
+}
+
+.copy__container--popup h2,
+.save__container--popup h2,
+.library__container--popup h2 {
+  font-size: 3rem;
+  margin: 2rem 0;
+}
+
+.copy__container--popup h3,
+.save__container--popup h3,
+.library__container--popup h3 {
+  font-size: 4rem;
 }
 
 .copy__container--popup input[type="text"],

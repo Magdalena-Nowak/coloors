@@ -133,6 +133,10 @@ h2 {
   }
 }
 
+.save__submit {
+  @extend %btnArea;
+  font-weight: 600;
+}
 
 .save__close {
   background-color: rgb(17, 27, 58);
@@ -187,11 +191,17 @@ input[type="range"] {
     top: 5%;
     left: 5%;
   }
-  h2,
   .save__name,
   .save__submit {
     margin: 2rem 0;
     font-size: 2rem;
+  }
+  h2 {
+    font-size: 3rem;
+    margin: 2rem 0;
+  }
+  h3 {
+    font-size: 4rem;
   }
   input[type="text"] {
     padding: 1rem 1rem;
