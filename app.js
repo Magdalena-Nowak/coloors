@@ -196,6 +196,10 @@ const submitSave = document.querySelector(".save__submit");
 const saveInput = document.querySelector(".save__name");
 const closeSave = document.querySelector(".save__close");
 const saveBtn = document.querySelector(".panel--save");
+const openLibraryBtn = document.querySelector(".panel--library");
+const libraryContainer = document.querySelector(".library__container");
+const libraryBtn = document.querySelector(".pick-palette-btn");
+const closeLibraryBtn = document.querySelector(".library__close");
 
 saveBtn.addEventListener("click", openPalette);
 
@@ -230,6 +234,30 @@ function savePalette() {
   //Save to local storage
   savetoLocal(paletteObj);
   saveInput.value = "";
+
+  //Generate the palette library
+  const palette = document.createElement("div");
+  palette.classList.add("custom-palette");
+  const title = document.createElement("h4");
+  title.innerText = paletteObj.name;
+  const preview = document.createElement("div");
+  preview.classList.add("small-preview");
+  paletteObj.colors.forEach((smallColor) => {
+    const smallDiv = document.createElement("div");
+    smallDiv.classList.add('preview-color');
+    preview.appendChild(smallDiv);
+    smallDiv.style.backgroundColor = smallColor;
+  });
+  const paletteBtn = document.createElement("button");
+  paletteBtn.classList.add("pick-palette-btn");
+  paletteBtn.classList.add(paletteObj.nr);
+  paletteBtn.innerText = "Select";
+
+  // Append to library
+  palette.appendChild(title);
+  palette.appendChild(preview);
+  palette.appendChild(paletteBtn);
+  libraryContainer.children[0].appendChild(palette);
 }
 
 function savetoLocal(paletteObj) {
@@ -241,6 +269,17 @@ function savetoLocal(paletteObj) {
   }
   localPalettes.push(paletteObj);
   localStorage.setItem("palettes", JSON.stringify(localPalettes));
+}
+
+openLibraryBtn.addEventListener("click", openLibrary);
+closeLibraryBtn.addEventListener("click", closeLibrary);
+
+function openLibrary() {
+  libraryContainer.classList.add("active");
+}
+
+function closeLibrary() {
+  libraryContainer.classList.remove("active");
 }
 
 randomColors();
