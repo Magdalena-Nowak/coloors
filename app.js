@@ -252,7 +252,10 @@ function savePalette() {
   paletteBtn.classList.add("pick-palette-btn");
   paletteBtn.classList.add(paletteObj.nr);
   paletteBtn.innerText = "Select";
-
+  const paletteRemoveBtn = document.createElement("button");
+  paletteRemoveBtn.classList.add("delete-palette-btn");
+  paletteRemoveBtn.classList.add(paletteObj.nr);
+  paletteRemoveBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
   //Attach event to the btn
 
   paletteBtn.addEventListener("click", (e) => {
@@ -271,7 +274,14 @@ function savePalette() {
   palette.appendChild(title);
   palette.appendChild(preview);
   palette.appendChild(paletteBtn);
+  palette.appendChild(paletteRemoveBtn);
   libraryContainer.children[0].appendChild(palette);
+  const paletteRemoveBtns = document.querySelectorAll(".delete-palette-btn");
+  paletteRemoveBtns.forEach((btn, index) => {
+    btn.addEventListener("click", (index) => {
+      console.log(index);
+    });
+  });
 }
 
 function savetoLocal(paletteObj) {
@@ -320,6 +330,10 @@ function getLocal() {
       paletteBtn.classList.add("pick-palette-btn");
       paletteBtn.classList.add(paletteObj.nr);
       paletteBtn.innerText = "Select";
+      const paletteRemoveBtn = document.createElement("button");
+      paletteRemoveBtn.classList.add("delete-palette-btn");
+      paletteRemoveBtn.classList.add(paletteObj.nr);
+      paletteRemoveBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
 
       //Attach event to the btn
 
@@ -339,10 +353,14 @@ function getLocal() {
       palette.appendChild(title);
       palette.appendChild(preview);
       palette.appendChild(paletteBtn);
+      palette.appendChild(paletteRemoveBtn);
       libraryContainer.children[0].appendChild(palette);
+      // const paletteRemoveBtns = document.querySelectorAll(
+      //   ".delete-palette-btn"
+      // );
     });
   }
 }
 getLocal();
-
+// localStorage.clear();
 randomColors();
