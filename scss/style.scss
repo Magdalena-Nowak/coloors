@@ -21,7 +21,9 @@ h1 {
 h2 {
   font-size: 1.8rem;
 }
-
+button {
+  border: none;
+}
 @mixin flex($flex, $direction, $justify, $align) {
   display: $flex;
   flex-direction: $direction;
