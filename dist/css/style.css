@@ -359,4 +359,8 @@ input[type="range"] {
   min-width: 4rem;
   height: 100%;
 }
+
+button i {
+  color: white;
+}
 /*# sourceMappingURL=style.css.map */

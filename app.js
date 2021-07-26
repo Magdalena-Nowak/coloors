@@ -8,7 +8,8 @@ const adjustBtns = document.querySelectorAll(".controls--adjust");
 const slidersContainer = document.querySelectorAll(".sliders");
 const slidersAdjustmentClose = document.querySelectorAll(".sliders--close");
 const refreshBtn = document.querySelector(".panel--refresh");
-const lockedBtn = document.querySelectorAll(".controls--lock");
+const lockBtns = document.querySelectorAll(".controls--lock");
+
 let savedPalettes = [];
 // // Add event listeners
 
@@ -40,7 +41,7 @@ adjustBtns.forEach((button, index) => {
   });
 });
 
-lockedBtn.forEach((button, index) => {
+lockBtns.forEach((button, index) => {
   button.addEventListener("click", () => lockChangeColor(index));
 });
 
@@ -73,13 +74,10 @@ function randomColors() {
     }
     div.style.backgroundColor = randomColor;
     hexText.innerText = randomColor;
-
-    const iconColors = div.querySelectorAll("button");
-    const adjustBtn = iconColors[0];
-    const lockBtn = iconColors[1];
-
+    const controlsBtns = div.querySelectorAll(".color--controls button");
+    // console.log(controlsBtns);
     //Ckeck for contrast
-    checkTextContrast(randomColor, hexText, adjustBtn, lockBtn);
+    checkTextContrast(randomColor, hexText, controlsBtns);
 
     // Initial colorize Sliders
     const color = chroma(randomColor);
@@ -89,22 +87,25 @@ function randomColors() {
     const saturation = sliders[2];
 
     colorizeSliders(color, hue, brightness, saturation);
+    return index;
   });
+
+  //Reset Inputs
+  resetInputs();
 }
 
-function checkTextContrast(color, hex, adjust, lock) {
-  const luminColor = color.get("lab.l");
+function checkTextContrast(color, text, controlsBtns) {
+  const luminColor = chroma(color).luminance();
   // DODAĆ OPCJĘ ZMIANY KOLORÓW IKON RAZEM Z TEKSTEM
-  if (luminColor < 50) {
-    hex.style.color = "white";
-    adjust.style.color = "white";
-    lock.style.color = "white";
+  if (luminColor < 0.5) {
+    text.style.color = "white";
+    controlsBtns.forEach((btn) => (btn.style.color = "white"));
   } else {
-    hex.style.color = "black";
-    adjust.style.color = "black";
-    lock.style.color = "black";
+    text.style.color = "black";
+    controlsBtns.forEach((btn) => (btn.style.color = "black"));
   }
 }
+
 function colorizeSliders(color, hue, brightness, saturation) {
   //Scale Saturation
   const noSat = color.set("hsl.s", 0);
@@ -126,6 +127,27 @@ function colorizeSliders(color, hue, brightness, saturation) {
   saturation.value = color.hsl()[1];
   brightness.value = color.hsl()[2];
   hue.value = color.hsl()[0];
+}
+
+function resetInputs() {
+  const sliders = document.querySelectorAll(".sliders input");
+  sliders.forEach((slider) => {
+    if (slider.name === "hue") {
+      const hueColor = initialColors[slider.getAttribute("data-hue")];
+      const hueValue = chroma(hueColor).hsl()[0];
+      slider.value = Math.floor(hueValue);
+    }
+    if (slider.name === "brightness") {
+      const brightColor = initialColors[slider.getAttribute("data-bright")];
+      const brightValue = chroma(brightColor).hsl()[2];
+      slider.value = Math.floor(brightValue * 100) / 100;
+    }
+    if (slider.name === "saturation") {
+      const satColor = initialColors[slider.getAttribute("data-sat")];
+      const satValue = chroma(satColor).hsl()[1];
+      slider.value = Math.floor(satValue * 100) / 100;
+    }
+  });
 }
 
 function hslControls(e) {
@@ -152,10 +174,13 @@ function updateTextUI(index) {
   const activeDiv = colorDivs[index];
   const color = chroma(activeDiv.style.backgroundColor);
   const textHex = activeDiv.querySelector("h1");
-  const adjustBtn = activeDiv.querySelector(".controls--adjust");
-  const lockBtn = activeDiv.querySelector(".controls--lock");
+  const icons = activeDiv.querySelectorAll(".controls i");
+  // console.log(icons);
   textHex.innerText = color.hex();
-  checkTextContrast(color, textHex, adjustBtn, lockBtn);
+  checkTextContrast(color, textHex);
+  for (icon of icons) {
+    checkTextContrast(color, icon);
+  }
 }
 
 function copyToClipboard(hex) {
@@ -177,10 +202,10 @@ function openAdjustmentPanel(index) {
 function lockChangeColor(index) {
   colorDivs[index].classList.toggle("locked");
   if (colorDivs[index].classList.contains("locked") == true) {
-    lockedBtn[index].innerHTML = `<i class="fas fa-lock"></i>`;
+    lockBtns[index].innerHTML = `<i class="fas fa-lock"></i>`;
     adjustBtns[index].style.pointerEvents = "none";
   } else {
-    lockedBtn[index].innerHTML = `<i class="fas fa-lock-open"></i>`;
+    lockBtns[index].innerHTML = `<i class="fas fa-lock-open"></i>`;
     adjustBtns[index].style.pointerEvents = "all";
   }
 }
@@ -219,69 +244,72 @@ function closePalette() {
 
 submitSave.addEventListener("click", savePalette);
 
-function savePalette() {
-  saveContainer.classList.remove("active");
-  popup.classList.remove("active");
-  const name = saveInput.value;
-  const colors = [];
-  currentHexes.forEach((hex) => {
-    colors.push(hex.innerText);
-  });
-  //generate Object
-  let paletteNr = savedPalettes.length;
-  const paletteObj = { name, colors, nr: paletteNr };
-  savedPalettes.push(paletteObj);
-  //Save to local storage
-  savetoLocal(paletteObj);
-  saveInput.value = "";
-
-  //Generate the palette library
-  const palette = document.createElement("div");
-  palette.classList.add("custom-palette");
-  const title = document.createElement("h4");
-  title.innerText = paletteObj.name;
-  const preview = document.createElement("div");
-  preview.classList.add("small-preview");
-  paletteObj.colors.forEach((smallColor) => {
-    const smallDiv = document.createElement("div");
-    smallDiv.classList.add("preview-color");
-    preview.appendChild(smallDiv);
-    smallDiv.style.backgroundColor = smallColor;
-  });
-  const paletteBtn = document.createElement("button");
-  paletteBtn.classList.add("pick-palette-btn");
-  paletteBtn.classList.add(paletteObj.nr);
-  paletteBtn.innerText = "Select";
-  const paletteRemoveBtn = document.createElement("button");
-  paletteRemoveBtn.classList.add("delete-palette-btn");
-  paletteRemoveBtn.classList.add(paletteObj.nr);
-  paletteRemoveBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
-  //Attach event to the btn
-
-  paletteBtn.addEventListener("click", (e) => {
-    closeLibrary();
-    const paletteIndex = e.target.classList[1];
-    initialColors = [];
-    savedPalettes[paletteIndex].colors.forEach((color, index) => {
-      initialColors.push(color);
-      colorDivs[index].style.backgroundColor = color;
-      const text = colorDivs[index].children[0];
-      updateTextUI(index);
-    });
-  });
+function savePalette(e) {
+  // saveContainer.classList.remove("active");
+  // popup.classList.remove("active");
+  // const name = saveInput.value;
+  // const colors = [];
+  // currentHexes.forEach((hex) => {
+  //   colors.push(hex.innerText);
+  // });
+  // //generate Object
+  // let paletteNr;
+  // const paletteObjects = JSON.parse(localStorage.getItem("palettes"));
+  // // if (paletteObjects) {
+  // //   palleteNr = paletteObjects.length;
+  // // } else {
+  // //   paletteNr = savedPalettes.length;
+  // // }
+  // const paletteObj = { name, colors, nr: paletteNr };
+  // savedPalettes.push(paletteObj);
+  // //Save to local storage
+  // savetoLocal(paletteObj);
+  // saveInput.value = "";
+  // //Generate the palette library
+  // const palette = document.createElement("div");
+  // palette.classList.add("custom-palette");
+  // const title = document.createElement("h4");
+  // title.innerText = paletteObj.name;
+  // const preview = document.createElement("div");
+  // preview.classList.add("small-preview");
+  // paletteObj.colors.forEach((smallColor) => {
+  //   const smallDiv = document.createElement("div");
+  //   smallDiv.classList.add("preview-color");
+  //   preview.appendChild(smallDiv);
+  //   smallDiv.style.backgroundColor = smallColor;
+  // });
+  // const paletteBtn = document.createElement("button");
+  // paletteBtn.classList.add("pick-palette-btn");
+  // paletteBtn.classList.add(paletteObj.nr);
+  // paletteBtn.innerText = "Select";
+  // const paletteRemoveBtn = document.createElement("button");
+  // paletteRemoveBtn.classList.add("delete-palette-btn");
+  // paletteRemoveBtn.classList.add(paletteObj.nr);
+  // paletteRemoveBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+  // //Attach event to the btn
+  // paletteBtn.addEventListener("click", (e) => {
+  //   closeLibrary();
+  //   const paletteIndex = e.target.classList[1];
+  //   initialColors = [];
+  //   savedPalettes[paletteIndex].colors.forEach((color, index) => {
+  //     initialColors.push(color);
+  //     colorDivs[index].style.backgroundColor = color;
+  //     const text = colorDivs[index].children[0];
+  // updateTextUI(index);
+  // });
+  // });
   // resetInputs();
   // Append to library
-  palette.appendChild(title);
-  palette.appendChild(preview);
-  palette.appendChild(paletteBtn);
-  palette.appendChild(paletteRemoveBtn);
-  libraryContainer.children[0].appendChild(palette);
-  const paletteRemoveBtns = document.querySelectorAll(".delete-palette-btn");
-  paletteRemoveBtns.forEach((btn, index) => {
-    btn.addEventListener("click", (index) => {
-      console.log(index);
-    });
-  });
+  // palette.appendChild(title);
+  // palette.appendChild(preview);
+  // palette.appendChild(paletteBtn);
+  // palette.appendChild(paletteRemoveBtn);
+  // libraryContainer.children[0].appendChild(palette);
+  // const paletteRemoveBtns = document.querySelectorAll(".delete-palette-btn");
+  // paletteRemoveBtns.forEach((btn, index) => {
+  //   btn.addEventListener("click", (index) => {
+  //   });
+  // });
 }
 
 function savetoLocal(paletteObj) {
@@ -308,58 +336,56 @@ function closeLibrary() {
 
 function getLocal() {
   // let localPalettes;
-  if (localStorage.getItem("palettes") === null) {
-    localPallets = [];
-  } else {
-    const paletteObjects = JSON.parse(localStorage.getItem("palettes"));
-    paletteObjects.forEach((paletteObj) => {
-      //Generate the palette library
-      const palette = document.createElement("div");
-      palette.classList.add("custom-palette");
-      const title = document.createElement("h4");
-      title.innerText = paletteObj.name;
-      const preview = document.createElement("div");
-      preview.classList.add("small-preview");
-      paletteObj.colors.forEach((smallColor) => {
-        const smallDiv = document.createElement("div");
-        smallDiv.classList.add("preview-color");
-        preview.appendChild(smallDiv);
-        smallDiv.style.backgroundColor = smallColor;
-      });
-      const paletteBtn = document.createElement("button");
-      paletteBtn.classList.add("pick-palette-btn");
-      paletteBtn.classList.add(paletteObj.nr);
-      paletteBtn.innerText = "Select";
-      const paletteRemoveBtn = document.createElement("button");
-      paletteRemoveBtn.classList.add("delete-palette-btn");
-      paletteRemoveBtn.classList.add(paletteObj.nr);
-      paletteRemoveBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
-
-      //Attach event to the btn
-
-      paletteBtn.addEventListener("click", (e) => {
-        closeLibrary();
-        const paletteIndex = e.target.classList[1];
-        initialColors = [];
-        paletteObjects[paletteIndex].colors.forEach((color, index) => {
-          initialColors.push(color);
-          colorDivs[index].style.backgroundColor = color;
-          const text = colorDivs[index].children[0];
-          updateTextUI(index);
-        });
-      });
-      // resetInputs();
-      // Append to library
-      palette.appendChild(title);
-      palette.appendChild(preview);
-      palette.appendChild(paletteBtn);
-      palette.appendChild(paletteRemoveBtn);
-      libraryContainer.children[0].appendChild(palette);
-      // const paletteRemoveBtns = document.querySelectorAll(
-      //   ".delete-palette-btn"
-      // );
-    });
-  }
+  // if (localStorage.getItem("palettes") === null) {
+  //   localPalettes = [];
+  // } else {
+  //   const paletteObjects = JSON.parse(localStorage.getItem("palettes"));
+  //   savedPalettes = [...paletteObjects];
+  //   console.log(savedPalettes);
+  //   savedPalettes.forEach((paletteObj) => {
+  //     //Generate the palette library
+  //     const palette = document.createElement("div");
+  //     palette.classList.add("custom-palette");
+  //     const title = document.createElement("h4");
+  //     title.innerText = paletteObj.name;
+  //     const preview = document.createElement("div");
+  //     preview.classList.add("small-preview");
+  //     paletteObj.colors.forEach((smallColor) => {
+  //       const smallDiv = document.createElement("div");
+  //       smallDiv.classList.add("preview-color");
+  //       preview.appendChild(smallDiv);
+  //       smallDiv.style.backgroundColor = smallColor;
+  //     });
+  //     const paletteBtn = document.createElement("button");
+  //     paletteBtn.classList.add("pick-palette-btn");
+  //     paletteBtn.classList.add(paletteObj.nr);
+  //     paletteBtn.innerText = "Select";
+  //     const paletteRemoveBtn = document.createElement("button");
+  //     paletteRemoveBtn.classList.add("delete-palette-btn");
+  //     paletteRemoveBtn.classList.add(paletteObj.nr);
+  //     paletteRemoveBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+  //     //Attach event to the btn
+  //     paletteBtn.addEventListener("click", (e) => {
+  //       closeLibrary();
+  //       initialColors = [];
+  //       paletteObjects[paletteIndex].colors.forEach((color, index) => {
+  //         initialColors.push(color);
+  //         colorDivs[index].style.backgroundColor = color;
+  //         const text = colorDivs[index].children[0];
+  // updateTextUI(index);
+  //       });
+  //     });
+  //     // resetInputs();
+  //     // Append to library
+  //     palette.appendChild(title);
+  //     palette.appendChild(preview);
+  //     palette.appendChild(paletteBtn);
+  //     palette.appendChild(paletteRemoveBtn);
+  //     libraryContainer.children[0].appendChild(palette);
+  //     // paletteRemoveBtn.addEventListener("click", (e) => {
+  //     // });
+  //   });
+  // }
 }
 getLocal();
 // localStorage.clear();
