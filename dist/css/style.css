@@ -24,6 +24,14 @@ h2 {
   font-size: 1.8rem;
 }
 
+button {
+  border: none;
+}
+
+.fa-trash-alt {
+  pointer-events: none;
+}
+
 .panel--library,
 .panel--refresh,
 .panel--save, .save__submit {
@@ -358,5 +366,9 @@ input[type="range"] {
 .preview-color {
   min-width: 4rem;
   height: 100%;
+}
+
+button i {
+  color: white;
 }
 /*# sourceMappingURL=style.css.map */

@@ -21,7 +21,13 @@ h1 {
 h2 {
   font-size: 1.8rem;
 }
+button {
+  border: none;
+}
 
+.fa-trash-alt {
+  pointer-events: none;
+}
 @mixin flex($flex, $direction, $justify, $align) {
   display: $flex;
   flex-direction: $direction;
@@ -74,6 +80,11 @@ h2 {
   @include flex(flex, column, space-around, center);
   flex: 1 0 20%;
 }
+
+// .color--controls button{
+// color: white;
+// }
+
 .controls--adjust,
 .controls--lock {
   border: none;
@@ -220,14 +231,6 @@ input[type="range"] {
   @include flex(flex, row, center, center);
   opacity: 0;
   pointer-events: none;
-  // .library__close {
-  //   position: absolute;
-  //   top: 5%;
-  //   left: 5%;
-  //   background-color: rgba(0, 0, 0, 0.4);
-  //   border: none;
-
-  // }
   &.active {
     opacity: 1;
     pointer-events: all;
@@ -313,4 +316,8 @@ input[type="range"] {
 .preview-color {
   min-width: 4rem;
   height: 100%;
+}
+
+button i {
+  color: white;
 }
