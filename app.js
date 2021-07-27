@@ -146,6 +146,39 @@ function resetInputs() {
       const satValue = chroma(satColor).hsl()[1];
       slider.value = Math.floor(satValue * 100) / 100;
     }
+    
+  });
+}
+
+function resetInputsNew(index, color) {
+  const sliders = document.querySelectorAll(".sliders");
+  const sliderInputs = sliders[index].querySelectorAll("input");
+  sliderInputs.forEach((slider) => {
+    if (slider.name === "hue") {
+      const hueColor = initialColors[slider.getAttribute("data-hue")];
+      const hueValue = chroma(hueColor).hsl()[0];
+      slider.value = Math.floor(hueValue);
+      const sliderHue = slider;
+      return sliderHue
+    }
+    if (slider.name === "brightness") {
+      const brightColor = initialColors[slider.getAttribute("data-bright")];
+      console.log(brightColor);
+      const brightValue = chroma(brightColor).hsl()[2];
+      console.log(brightValue);
+      slider.value = Math.floor(brightValue * 100) / 100;
+      const sliderBright = slider;
+      return sliderBright
+    }
+    if (slider.name === "saturation") {
+      const satColor = initialColors[slider.getAttribute("data-sat")];
+      const satValue = chroma(satColor).hsl()[1];
+      slider.value = Math.floor(satValue * 100) / 100;
+      const sliderSat = slider;
+      return sliderSat
+    }
+    // const newColor = chroma(color);
+    colorizeSliders(color, sliderHue, sliderBright, sliderSat);
   });
 }
 
@@ -174,7 +207,6 @@ function updateTextUI(index) {
   const color = chroma(activeDiv.style.backgroundColor);
   const textHex = activeDiv.querySelector("h1");
   const icons = activeDiv.querySelectorAll(".controls i");
-  // console.log(icons);
   textHex.innerText = color.hex();
   checkTextContrast(color, textHex);
   for (icon of icons) {
@@ -259,7 +291,7 @@ function savePalette(e) {
   } else {
     paletteNr = savedPalettes.length;
   }
-  
+
   const paletteObj = { name, colors, nr: paletteNr };
   savedPalettes.push(paletteObj);
 
@@ -288,45 +320,37 @@ function savePalette(e) {
   paletteRemoveBtn.classList.add(paletteObj.nr);
   paletteRemoveBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
 
-  
   //Attach event to the btn
   paletteBtn.addEventListener("click", (e) => {
     closeLibrary();
     const paletteIndex = e.target.classList[1];
     initialColors = [];
-
     savedPalettes[paletteIndex].colors.forEach((color, index) => {
       initialColors.push(color);
       colorDivs[index].style.backgroundColor = color;
       const hexText = colorDivs[index].children[0];
-      let innerTxt = hexText.innerText;
-      innerTxt = color;
-      checkTextContrast(color, hexText, );
-      const controlsBtns = colorDivs[index].querySelectorAll(".color--controls button");
+      hexText.innerText = color;
+      const controlsBtns = colorDivs[index].querySelectorAll(
+        ".color--controls button"
+      );
       checkTextContrast(color, hexText, controlsBtns);
-        //    for (icon of icons) {
-        //   checkTextContrast(color, icon);
-        // }
-      // function updateTextUI(index) {
-        // const textHex = colorDivs[index].querySelector("h1");
-        // textHex.innerText = color;
-        // 
+      resetInputsNew(index, color);
+    });
+  });
 
-      // }
+  paletteRemoveBtn.addEventListener("click", (e) => {
+    const paletteIndex = e.target.classList[1];
+    const libraryPopup = document.querySelector(".library__container--popup");
+    savedPalettes.slice(paletteIndex, paletteIndex + 1);
+    libraryPopup.removeChild(e.target.parentElement);
   });
-  });
-  // resetInputs();
+
   // Append to library
   palette.appendChild(title);
   palette.appendChild(preview);
   palette.appendChild(paletteBtn);
   palette.appendChild(paletteRemoveBtn);
   libraryContainer.children[0].appendChild(palette);
-  // const paletteRemoveBtns = document.querySelectorAll(".delete-palette-btn");
-  // paletteRemoveBtns.forEach((btn, index) => {
-  //   btn.addEventListener("click", (index) => {
-  //   });
-  // });
 }
 
 function savetoLocal(paletteObj) {

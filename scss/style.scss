@@ -24,6 +24,10 @@ h2 {
 button {
   border: none;
 }
+
+.fa-trash-alt {
+  pointer-events: none;
+}
 @mixin flex($flex, $direction, $justify, $align) {
   display: $flex;
   flex-direction: $direction;
