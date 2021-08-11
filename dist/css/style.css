@@ -227,8 +227,9 @@ input[type="range"]::-ms-thumb {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  display: none;
-  transition: all 10s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease-in-out;
 }
 
 .container__popup {
@@ -241,9 +242,7 @@ input[type="range"]::-ms-thumb {
   position: relative;
   background-color: white;
   display: none;
-  opacity: 0;
-  transition: all 10s ease;
-  transform: translateY(-2rem);
+  transition: display 1s ease;
 }
 
 .container__popup--library {
@@ -281,13 +280,13 @@ input[type="range"]::-ms-thumb {
 }
 
 .container.active {
-  display: flex;
+  opacity: 1;
+  pointer-events: all;
 }
 
 .container__popup--library.active,
 .container__popup--saving.active,
 .container__popup--clipboard.active {
-  opacity: 1;
   display: flex;
 }
 

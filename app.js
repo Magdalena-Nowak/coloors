@@ -394,12 +394,11 @@ closeLibraryBtn.addEventListener("click", closingLibrary);
 closeSavingBtn.addEventListener("click", closingSaving);
 saveBtn.addEventListener("click", savePalette);
 
-// popupContainer.addEventListener("transitionend", () => {
-//   const popupBox = popup.children[1];
-//   popupContainer.classList.remove("active");
-//   popupBox.classList.remove("active");
-//
-// });
+popupContainer.addEventListener("transitionend", () => {
+  const popupBox = popupContainer.children[1];
+  popupContainer.classList.remove("active");
+  popupBox.classList.remove("active");
+});
 
 getLocal();
 // localStorage.clear();
