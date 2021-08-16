@@ -1,3 +1,5 @@
+@import "input";
+
 * {
   margin: 0;
   padding: 0;
@@ -47,47 +49,15 @@ main {
   @include flex(column, stretch, stretch);
 }
 
-input[type="range"] {
-  appearance: none;
-  height: 1.5rem;
-  border: none;
-  padding: 0.1rem 0.2rem;
-  border-radius: 0.5rem;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 2.5rem;
-  height: 2rem;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: rgb(17, 27, 58);
-}
-input[type="range"]::-moz-range-thumb {
-  -webkit-appearance: none;
-  width: 2.5rem;
-  height: 2rem;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: rgb(17, 27, 58);
-}
-
-input[type="range"]::-ms-thumb {
-  -webkit-appearance: none;
-  width: 2.5rem;
-  height: 2rem;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: rgb(17, 27, 58);
-}
 // Colors
 //Colors controls
 .colors {
-  height: 90vh;
+  min-height: 110vh;
   @include flex(column, flex-start, stretch);
   font-size: 1.2rem;
   &__panel {
     flex: 1 1 40%;
+    min-height: 18rem;
     @include flex(row, space-around, center);
     position: relative;
     overflow: hidden;
@@ -108,12 +78,13 @@ input[type="range"]::-ms-thumb {
     background: white;
     align-self: flex-end;
     height: 90%;
+    width: 50%;
     @include flex(column, space-around, center);
     font-size: 1rem;
     @extend %borderRadius;
     position: absolute;
     bottom: 0;
-    left: 65%;
+    left: 45%;
     transform: translateY(110%);
     transition: all 0.5s ease-in-out;
   }
@@ -139,6 +110,7 @@ input[type="range"]::-ms-thumb {
 
 @media (min-width: 1200px) {
   .colors {
+    min-height: 90vh;
     font-size: 1.6rem;
     @include flex(row, flex-start, stretch);
     &__panel {
@@ -178,7 +150,7 @@ input[type="range"]::-ms-thumb {
 }
 
 .options {
-  height: 10vh;
+  height: 25vh;
   @include flex(row, space-evenly, center);
   &__library,
   &__refresh,
@@ -198,6 +170,7 @@ input[type="range"]::-ms-thumb {
 
 @media (min-width: 1200px) {
   .options {
+    height: 10vh;
     &__library,
     &__refresh,
     &__save {

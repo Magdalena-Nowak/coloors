@@ -1,0 +1,62 @@
+$thumb-color: rgb(17, 27, 58) !default;
+$thumb-radius: 0.5rem !default;
+$thumb-height: 1.5rem !default;
+$thumb-width: 2.5rem !default;
+
+$track-width: 100% !default;
+$track-height: 1rem !default;
+$track-radius: 0.5rem !default;
+
+
+@mixin track {
+  cursor: pointer;
+  height: $track-height;
+  transition: all 0.2s ease;
+  width: $track-width;
+}
+
+@mixin thumb {
+  background: $thumb-color;
+  border: none;
+  border-radius: $thumb-radius;
+  cursor: pointer;
+  height: $thumb-height;
+  width: $thumb-width;
+}
+
+[type="range"] {
+  -webkit-appearance: none;
+  width: $track-width;
+  height: $track-height;
+  border-radius: $track-radius;
+  margin: 1rem 0;
+  &::-webkit-slider-runnable-track {
+    @include track;
+    border-radius: $track-radius;
+  }
+
+  &::-webkit-slider-thumb {
+    @include thumb;
+    -webkit-appearance: none;
+  }
+
+  &::-moz-range-track {
+    @include track;
+    border-radius: $track-radius;
+  }
+
+  &::-moz-range-thumb {
+    @include thumb;
+  }
+
+  &::-ms-track {
+    @include track;
+    border-radius: $track-radius;
+    background: transparent;
+    color: transparent;
+  }
+
+  &::-ms-thumb {
+    @include thumb;
+  }
+}
