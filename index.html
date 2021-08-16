@@ -17,7 +17,8 @@
                 <h1 class="colors__panel-header"></h1>
                 <div class="colors__panel-controls">
                     <button class="colors__panel-controls--adjust-btn"><i class="fas fa-sliders-h"></i></button>
-                    <button class="colors__panel-controls--lock-btn"><i class="fas fa-lock-open"></i></button>
+                    <button class="colors__panel-controls--lock-btn"><i
+                            class="colors__panel-controls--lock-icon fas fa-lock-open"></i></button>
                 </div>
                 <div class="colors__sliders">
                     <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
@@ -35,7 +36,8 @@
                 <h1 class="colors__panel-header"></h1>
                 <div class="colors__panel-controls">
                     <button class="colors__panel-controls--adjust-btn"><i class="fas fa-sliders-h"></i></button>
-                    <button class="colors__panel-controls--lock-btn"><i class="fas fa-lock-open"></i></button>
+                    <button class="colors__panel-controls--lock-btn"><i
+                            class="colors__panel-controls--lock-icon fas fa-lock-open"></i></button>
                 </div>
                 <div class="colors__sliders">
                     <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
@@ -53,7 +55,8 @@
                 <h1 class="colors__panel-header"></h1>
                 <div class="colors__panel-controls">
                     <button class="colors__panel-controls--adjust-btn"><i class="fas fa-sliders-h"></i></button>
-                    <button class="colors__panel-controls--lock-btn"><i class="fas fa-lock-open"></i></button>
+                    <button class="colors__panel-controls--lock-btn"><i
+                            class="colors__panel-controls--lock-icon fas fa-lock-open"></i></button>
                 </div>
                 <div class="colors__sliders">
                     <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
@@ -71,7 +74,8 @@
                 <h1 class="colors__panel-header"></h1>
                 <div class="colors__panel-controls">
                     <button class="colors__panel-controls--adjust-btn"><i class="fas fa-sliders-h"></i></button>
-                    <button class="colors__panel-controls--lock-btn"><i class="fas fa-lock-open"></i></button>
+                    <button class="colors__panel-controls--lock-btn"><i
+                            class="colors__panel-controls--lock-icon fas fa-lock-open"></i></button>
                 </div>
                 <div class="colors__sliders">
                     <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
@@ -89,7 +93,8 @@
                 <h1 class="colors__panel-header"></h1>
                 <div class="colors__panel-controls">
                     <button class="colors__panel-controls--adjust-btn"><i class="fas fa-sliders-h"></i></button>
-                    <button class="colors__panel-controls--lock-btn"><i class="fas fa-lock-open"></i></button>
+                    <button class="colors__panel-controls--lock-btn"><i
+                            class="colors__panel-controls--lock-icon fas fa-lock-open"></i></button>
                 </div>
                 <div class="colors__sliders">
                     <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
@@ -118,36 +123,24 @@
                 <h2 class="options__save-header">Save</h2>
             </div>
         </div>
-        <div class="container">
-            <div class="container__popup container__popup--library">
-                <button class="container__popup-close-btn"><i class="fas fa-times"></i></button>
-                <h2 class="container__popup-header">Pick your palette</h2>
-            </div>
-            <div class="container__popup container__popup--clipboard">
-                <h2 class="container__popup-header">Copied to clipboard!</h2>
-                <h3 class="container__popup-icon"><i class="far fa-thumbs-up"></i></h3>
-            </div>
-            <div class="container__popup container__popup--saving">
-                <button class="container__popup-close-btn"><i class="fas fa-times"></i></button>
-                <h2 class="container__popup-header">Give a name to your palette!</h2>
-                <input class="container__popup-name" type="text" max="30">
-                <button class="container__popup-save-btn">Save</button>
+        <div class="library">
+            <div class="library__popup">
+                <button class="library__popup-close-btn"><i class="fas fa-times"></i></button>
+                <h2 class="library__popup-header">Pick your palette</h2>
             </div>
         </div>
-        <div class="container__popup container__popup--library">
-            <button class="container__popup-close-btn"><i class="fas fa-times"></i></button>
-            <h2 class="container__popup-header">Pick your palette</h2>
-            <div class="library-palette">
-                <h4 class="library-palette__header"></h4>
-                <div class="library-palette__colors-preview">
-                    <div class="library-palette__color"></div>
-                    <div class="library__color"></div>
-                    <div class="library__color"></div>
-                    <div class="library__color"></div>
-                    <div class="library__color"></div>
-                </div>
-                <button class="library-palette__pick-btn"></button>
-                <button class="library-palette__remove-btn"></button>
+        <div class="clipboard">
+            <div class="clipboard__popup">
+                <h2 class="clipboard__popup-header">Copied to clipboard!</h2>
+                <h3 class="clipboard__popup-icon"><i class="far fa-thumbs-up"></i></h3>
+            </div>
+        </div>
+        <div class="save">
+            <div class="save__popup">
+                <button class="save__popup-close-btn"><i class="fas fa-times"></i></button>
+                <h2 class="save__popup-header">Give a name to your palette!</h2>
+                <input class="save__popup-name" type="text" max="30">
+                <button class="save__popup-save-btn">Save</button>
             </div>
         </div>
     </main>
