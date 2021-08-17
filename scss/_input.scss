@@ -7,7 +7,6 @@ $track-width: 100% !default;
 $track-height: 1rem !default;
 $track-radius: 0.5rem !default;
 
-
 @mixin track {
   cursor: pointer;
   height: $track-height;
@@ -22,6 +21,7 @@ $track-radius: 0.5rem !default;
   cursor: pointer;
   height: $thumb-height;
   width: $thumb-width;
+  margin: 0;
 }
 
 [type="range"] {
