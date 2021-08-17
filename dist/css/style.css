@@ -283,6 +283,7 @@ main {
 .library__popup {
   width: 90%;
   height: 50%;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -351,7 +352,8 @@ main {
 }
 
 .library__popup {
-  overflow-y: scroll;
+  height: 70%;
+  overflow: scroll;
 }
 
 .save.active {
@@ -380,50 +382,58 @@ main {
 }
 
 @media (min-width: 560px) {
-  .container__popup {
+  .save__popup,
+  .clipboard__popup {
     width: 60%;
     height: 40%;
+  }
+  .library__popup {
+    width: 70%;
+    height: 70%;
   }
 }
 
 @media (min-width: 1200px) {
-  .container__popup {
-    width: 50rem;
-    height: 40rem;
-  }
-  .container__popup--library {
-    width: 65rem;
+  .save__popup,
+  .clipboard__popup,
+  .library__popup {
+    width: 80rem;
     height: 50rem;
   }
 }
 
 .library-palette {
-  display: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
-  margin: 1rem auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas: "header preview preview preview" "pick pick remove remove";
+  gap: 1rem;
+  width: 85%;
+  margin: 1.5rem auto;
+  font-size: 2rem;
+  letter-spacing: 0.1rem;
 }
 
 .library-palette__header {
-  font-size: 2.2rem;
-  margin: 0 1rem;
-  flex: 1 1 20%;
+  grid-area: header;
+  align-self: center;
 }
 
 .library-palette__pick-btn, .library-palette__remove-btn {
-  height: 100%;
-  margin: 0 1rem;
-  font-size: 2rem;
-  padding: 1rem 2.5rem;
+  font-size: 2.2rem;
   cursor: pointer;
   background-color: #111b3a;
   border: none;
   color: white;
-  flex: 1 1 20%;
   pointer-events: all;
+}
+
+.library-palette__pick-btn {
+  grid-area: pick;
+}
+
+.library-palette__remove-btn {
+  grid-area: remove;
 }
 
 .library-palette__colors-preview {
@@ -431,18 +441,12 @@ main {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 20rem;
   height: 5rem;
-  margin: 0 1rem;
-  flex: 2 1 20%;
+  grid-area: preview;
 }
 
 .library-palette__color {
   min-width: 20%;
   height: 100%;
-}
-
-button i {
-  color: white;
 }
 /*# sourceMappingURL=style.css.map */
