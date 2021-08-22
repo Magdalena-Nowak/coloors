@@ -1,6 +1,6 @@
 # coloors
 
-Page website based on the course Developed by Ed.
+The website designed to generate and save color palettes.
 
 Live demo: https://nervous-colden-d9b652.netlify.app/
 
@@ -12,8 +12,7 @@ Live demo: https://nervous-colden-d9b652.netlify.app/
 * [Setup](#setup)
 
 ## General Info
-Page website based on the course Developed by Ed. Practicing use objects, classes and constructors in JS. 
-The theme was created using HTML, CSS, SCSS, JavaScript, BEM.
+
 
 ## Technologies Used
 
