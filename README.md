@@ -1,8 +1,8 @@
 # coloors
 
-Page website based on the course Developed by Ed.
+The website designed to generate and save color palettes.
 
-Live demo: https://magdalena-nowak.github.io/coloors/
+Live demo: https://nervous-colden-d9b652.netlify.app/
 
 ## Table of content
 
@@ -12,8 +12,7 @@ Live demo: https://magdalena-nowak.github.io/coloors/
 * [Setup](#setup)
 
 ## General Info
-Page website based on the course Developed by Ed. Practicing use objects, classes and constructors in JS. 
-The theme was created using HTML, CSS, SCSS, JavaScript, BEM.
+
 
 ## Technologies Used
 
@@ -25,8 +24,8 @@ The theme was created using HTML, CSS, SCSS, JavaScript, BEM.
 
 ## Screenshots
 
-![image](https://user-images.githubusercontent.com/70846864/126466538-61a8be02-f33e-4f51-8e18-9e364dca46b3.png)
+![image](https://user-images.githubusercontent.com/70846864/130365567-f077999f-dc93-4f95-b557-75825c1c8702.png)
 
 ## Setup
-Live demo: https://magdalena-nowak.github.io/coloors/
+Live demo: https://nervous-colden-d9b652.netlify.app/
 
