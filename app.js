@@ -66,11 +66,32 @@ const resetInputs = () => {
   });
 };
 
+const colorizeSliders = (color, hue, brightness, saturation) => {
+  //Scale Saturation
+  const noSat = color.set("hsl.s", 0);
+  const fullSat = color.set("hsl.s", 1);
+  const scaleSat = chroma.scale([noSat, color, fullSat]);
+
+  // Scale brightness
+  const midBright = color.set("hsl.l", 0.5);
+  const scaleBright = chroma.scale(["black", midBright, "white"]);
+
+  // Update Input Colors
+  saturation.style.backgroundImage = `linear-gradient(to right,${scaleSat(
+    0
+  )}, ${scaleSat(1)})`;
+  brightness.style.backgroundImage = `linear-gradient(to right, ${scaleBright(
+    0
+  )}, ${midBright}, ${scaleBright(1)}`;
+  hue.style.backgroundImage = `linear-gradient(to right, black,  red, orange, yellow, green, cyan, blue, indigo, violet, grey)`;
+};
+
 const randomColors = () => {
   initialColors = [];
   colorsPanels.forEach((panel, index) => {
     const hexText = panel.children[0];
     const randomColor = generateHex();
+
     if (panel.classList.contains("locked")) {
       initialColors.push(hexText.innerText);
       return;
@@ -104,26 +125,6 @@ const openAdjustmentPanel = (index) => {
 };
 
 // Generate new color in HEX
-
-const colorizeSliders = (color, hue, brightness, saturation) => {
-  //Scale Saturation
-  const noSat = color.set("hsl.s", 0);
-  const fullSat = color.set("hsl.s", 1);
-  const scaleSat = chroma.scale([noSat, color, fullSat]);
-
-  // Scale brightness
-  const midBright = color.set("hsl.l", 0.5);
-  const scaleBright = chroma.scale(["black", midBright, "white"]);
-
-  // Update Input Colors
-  saturation.style.backgroundImage = `linear-gradient(to right,${scaleSat(
-    0
-  )}, ${scaleSat(1)})`;
-  brightness.style.backgroundImage = `linear-gradient(to right, ${scaleBright(
-    0
-  )}, ${midBright}, ${scaleBright(1)}`;
-  hue.style.backgroundImage = `linear-gradient(to right, black,  red, orange, yellow, green, cyan, blue, indigo, violet, grey)`;
-};
 
 const hslControls = (e) => {
   const index =
@@ -260,7 +261,17 @@ const pickingPalette = () => {
       const text = colorsPanels[index].children[0];
       updateTextUI(index);
     });
+
     resetInputs();
+    colorsPanels.forEach((panel) => {
+      const sliders = panel.querySelectorAll(".colors__sliders input");
+      const color = panel.querySelector(".colors__panel-header").textContent;
+      const hue = sliders[0];
+      const brightness = sliders[1];
+      const saturation = sliders[2];
+      const colorHsl = chroma(color);
+      colorizeSliders(colorHsl, hue, brightness, saturation);
+    });
   });
 };
 
@@ -298,7 +309,6 @@ const savePalette = (e) => {
   saveInput.value = "";
   createPaletteDiv(paletteObj);
 
-  //Attach event to the btns
   pickingPalette();
   removePalette();
 };
