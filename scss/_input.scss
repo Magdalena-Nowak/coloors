@@ -1,17 +1,10 @@
 $thumb-color: rgb(17, 27, 58) !default;
 $thumb-radius: 0.5rem !default;
-$thumb-height: 1.5rem !default;
-$thumb-width: 2.5rem !default;
-
-$track-width: 100% !default;
-$track-height: 1rem !default;
 $track-radius: 0.5rem !default;
 
 @mixin track {
   cursor: pointer;
-  height: $track-height;
   transition: all 0.2s ease;
-  width: $track-width;
 }
 
 @mixin thumb {
@@ -19,17 +12,11 @@ $track-radius: 0.5rem !default;
   border: none;
   border-radius: $thumb-radius;
   cursor: pointer;
-  height: $thumb-height;
-  width: $thumb-width;
-  margin: 0;
 }
 
 [type="range"] {
   -webkit-appearance: none;
-  width: $track-width;
-  height: $track-height;
   border-radius: $track-radius;
-  margin: 1rem 0;
   &::-webkit-slider-runnable-track {
     @include track;
     border-radius: $track-radius;

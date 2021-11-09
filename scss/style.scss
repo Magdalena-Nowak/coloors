@@ -6,13 +6,15 @@
   box-sizing: border-box;
 }
 html {
-  font-size: 10px;
-  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-size: 62.5%;
 }
 
-button,
-input[type="text"] {
-  font-family: "Yanone Kaffeesatz", sans-serif;
+$fontFamily: "Bitter", serif;
+$btnColor: rgb(32, 51, 109);
+
+body {
+  font-family: $fontFamily;
+  font-size: 1.6rem;
 }
 
 @mixin flex($direction, $justify, $align) {
@@ -22,331 +24,358 @@ input[type="text"] {
   align-items: $align;
 }
 
-%btnArea {
-  padding: 0.5rem 1rem;
-  @include flex(column, center, center);
-  color: white;
-  background-color: rgb(17, 27, 58);
-  border-top-left-radius: 0.7rem;
-  border-bottom-right-radius: 0.7rem;
-  font-size: 1.4rem;
-  cursor: pointer;
+%sliderBorder {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
-%btn {
-  border: none;
-  background-color: transparent;
-  color: white;
-  font-size: 2rem;
-}
-
-%borderRadius {
-  border-top-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-}
-
-main {
-  @include flex(column, stretch, stretch);
-}
-
-//Colors controls
 .colors {
-  min-height: 110vh;
-  @include flex(column, flex-start, stretch);
-  font-size: 1.2rem;
   &__panel {
-    flex: 1 1 40%;
-    min-height: 18rem;
-    @include flex(row, space-around, center);
+    height: 25vh;
     position: relative;
     overflow: hidden;
+    &-header {
+      padding: 1rem;
+      font-weight: 600;
+    }
+    &-controls {
+      .btn {
+        font-size: 2rem;
+      }
+    }
   }
   &__panel-header {
-    cursor: pointer;
-  }
-  &__panel-controls--adjust-btn,
-  &__panel-controls--lock-btn {
-    @extend %btn;
-    margin: 0 1rem;
     cursor: pointer;
   }
   &__panel-controls--lock-icon {
     pointer-events: none;
   }
   &__sliders {
-    background: white;
-    align-self: flex-end;
-    height: 90%;
-    width: 50%;
-    @include flex(column, space-around, center);
-    font-size: 1rem;
-    @extend %borderRadius;
+    padding: 2rem;
+    @extend %sliderBorder;
+    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
     position: absolute;
-    bottom: 0;
-    left: 45%;
-    transform: translateY(110%);
+    bottom: 0%;
+    left: 50%;
+    transform: translateX(-50%);
     transition: all 0.5s ease-in-out;
   }
 }
 
 .colors__sliders.active {
-  transform: translateY(0);
+  transform: translate(-50%, 102%);
 }
 
 .sliders {
   &__close-btn {
-    @extend %btnArea;
-    border: none;
-    align-self: flex-start;
+    background-color: $btnColor;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
-  &__hue-input,
-  &__bright-input,
-  &__sat-input {
-    width: 70%;
-    border: none;
+  &__wrapper {
+    @include flex(row, space-between, center);
+    padding: 0.5rem;
+    h4 {
+      margin-right: 2rem;
+    }
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .colors {
-    min-height: 90vh;
-    font-size: 1.6rem;
-    @include flex(row, flex-start, stretch);
     &__panel {
-      flex: 1 1 40%;
-      @include flex(column, space-between, center);
+      height: 50vh;
+      flex-direction: column;
+      &-header {
+        padding: 3rem;
+      }
     }
-    &__panel-controls {
-      @include flex(column, space-between, center);
-    }
-    &__panel-controls--adjust-btn,
-    &__panel-controls--lock-btn {
-      margin: 4rem 0;
-      font-size: 3rem;
-    }
-    &__panel-header {
-      margin: 3rem 0;
-    }
-    &__sliders {
-      height: 30vh;
-      width: 90%;
-      font-size: 1.4rem;
-      position: absolute;
-      bottom: 0;
-      left: 5%;
-      transform: translateY(110%);
-      transition: all 0.5s ease-in-out;
+  }
+}
+@media (min-width: 992px) {
+  .colors {
+    &__panel {
+      height: 100vh;
+      flex-direction: column;
+      &-controls {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2rem;
+      }
+      .btn {
+        font-size: 1.6rem;
+      }
     }
   }
   .sliders {
-    &__close-btn {
-      padding: 1.5rem 2rem;
-      top: -1%;
-      position: absolute;
-      font-size: 2.5rem;
+    &__wrapper {
+      flex-direction: column;
     }
   }
 }
+// main {
+//   @include flex(column, stretch, stretch);
+// }
 
-.options {
-  height: 25vh;
-  @include flex(row, space-evenly, center);
-  &__library,
-  &__refresh,
-  &__save {
-    width: 8rem;
-    @extend %btnArea;
-    pointer-events: all;
-  }
-  &__library-btn,
-  &__refresh-btn,
-  &__save-btn {
-    margin-bottom: 1rem;
-    pointer-events: none;
-    @extend %btn;
-  }
-}
+// //Colors controls
 
-@media (min-width: 1200px) {
-  .options {
-    height: 10vh;
-    &__library,
-    &__refresh,
-    &__save {
-      width: 12rem;
-    }
-    &__library-btn,
-    &__refresh-btn,
-    &__save-btn {
-      font-size: 2.5rem;
-    }
-    &__library-header,
-    &__refresh-header,
-    &__save-header {
-      font-size: 2.5rem;
-    }
-  }
-}
+// .sliders {
+//   &__close-btn {
+//     @extend %btnArea;
+//     border: none;
+//     align-self: flex-start;
+//   }
+//   &__hue-input,
+//   &__bright-input,
+//   &__sat-input {
+//     width: 70%;
+//     border: none;
+//   }
+// }
 
-.save,
-.clipboard,
-.library {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  width: 100%;
-  height: 100%;
-  @include flex(row, center, center);
-  font-size: 1.6rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.6s ease-in-out;
-  &__popup {
-    width: 90%;
-    height: 50%;
-    padding: 2rem 0;
-    @include flex(column, space-around, center);
-    position: relative;
-    background-color: white;
-    text-align: center;
-    opacity: 0;
-    pointer-events: none;
-    @extend %borderRadius;
-    transition: all 0.6s ease-in-out;
-  }
-  &__popup-close-btn {
-    @extend %btnArea;
-    padding: 1rem;
-    font-size: 2rem;
-    border: none;
-    position: absolute;
-    top: -1%;
-    left: 0;
-  }
-  &__popup-save-btn {
-    @extend %btnArea;
-    border: none;
-    font-size: 2.5rem;
-    padding: 1rem 2rem;
-  }
-  &__popup-icon {
-    font-size: 3rem;
-  }
-  &__popup-name {
-    width: 60%;
-    height: 3.5rem;
-    font-family: serif;
-    font-size: 2.2rem;
-  }
-  &__popup-header {
-    margin-top: 2.5rem;
-  }
-}
+// @media (min-width: 1200px) {
+//   .colors {
+//     min-height: 90vh;
+//     font-size: 1.6rem;
+//     @include flex(row, flex-start, stretch);
+//     &__panel {
+//       flex: 1 1 40%;
+//       @include flex(column, space-between, center);
+//     }
+//     &__panel-controls {
+//       @include flex(column, space-between, center);
+//     }
+//     &__panel-controls--adjust-btn,
+//     &__panel-controls--lock-btn {
+//       margin: 4rem 0;
+//       font-size: 3rem;
+//     }
+//     &__panel-header {
+//       margin: 3rem 0;
+//     }
+//     &__sliders {
+//       height: 30vh;
+//       width: 90%;
+//       font-size: 1.4rem;
+//       position: absolute;
+//       bottom: 0;
+//       left: 5%;
+//       transform: translateY(110%);
+//       transition: all 0.5s ease-in-out;
+//     }
+//   }
+//   .sliders {
+//     &__close-btn {
+//       padding: 1.5rem 2rem;
+//       top: -1%;
+//       position: absolute;
+//       font-size: 2.5rem;
+//     }
+//   }
+// }
 
-.clipboard__popup {
-  transform: translateY(20%);
-}
-.clipboard.active {
-  opacity: 1;
-  pointer-events: all;
-}
-.clipboard__popup.active {
-  opacity: 1;
-  transform: translateY(0%);
-  pointer-events: all;
-}
-.library__popup {
-  height: 70%;
-  overflow: scroll;
-}
-.save.active {
-  opacity: 1;
-  pointer-events: all;
-}
-.save__popup.active {
-  opacity: 1;
-  pointer-events: all;
-}
+// .options {
+//   height: 25vh;
+//   @include flex(row, space-evenly, center);
+//   &__library,
+//   &__refresh,
+//   &__save {
+//     width: 8rem;
+//     @extend %btnArea;
+//     pointer-events: all;
+//   }
+//   &__library-btn,
+//   &__refresh-btn,
+//   &__save-btn {
+//     margin-bottom: 1rem;
+//     pointer-events: none;
+//     @extend %btn;
+//   }
+// }
 
-.library.active {
-  opacity: 1;
-  pointer-events: all;
-}
+// @media (min-width: 1200px) {
+//   .options {
+//     height: 10vh;
+//     &__library,
+//     &__refresh,
+//     &__save {
+//       width: 12rem;
+//     }
+//     &__library-btn,
+//     &__refresh-btn,
+//     &__save-btn {
+//       font-size: 2.5rem;
+//     }
+//     &__library-header,
+//     &__refresh-header,
+//     &__save-header {
+//       font-size: 2.5rem;
+//     }
+//   }
+// }
 
-.library__popup.active {
-  opacity: 1;
-  pointer-events: all;
-}
+// .save,
+// .clipboard,
+// .library {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   background-color: rgba(0, 0, 0, 0.4);
+//   width: 100%;
+//   height: 100%;
+//   @include flex(row, center, center);
+//   font-size: 1.6rem;
+//   opacity: 0;
+//   pointer-events: none;
+//   transition: all 0.6s ease-in-out;
+//   &__popup {
+//     width: 90%;
+//     height: 50%;
+//     padding: 2rem 0;
+//     @include flex(column, space-around, center);
+//     position: relative;
+//     background-color: white;
+//     text-align: center;
+//     opacity: 0;
+//     pointer-events: none;
+//     @extend %borderRadius;
+//     transition: all 0.6s ease-in-out;
+//   }
+//   &__popup-close-btn {
+//     @extend %btnArea;
+//     padding: 1rem;
+//     font-size: 2rem;
+//     border: none;
+//     position: absolute;
+//     top: -1%;
+//     left: 0;
+//   }
+//   &__popup-save-btn {
+//     @extend %btnArea;
+//     border: none;
+//     font-size: 2.5rem;
+//     padding: 1rem 2rem;
+//   }
+//   &__popup-icon {
+//     font-size: 3rem;
+//   }
+//   &__popup-name {
+//     width: 60%;
+//     height: 3.5rem;
+//     font-family: serif;
+//     font-size: 2.2rem;
+//   }
+//   &__popup-header {
+//     margin-top: 2.5rem;
+//   }
+// }
 
-.fa-times,
-.fa-trash-alt {
-  pointer-events: none;
-}
+// .clipboard__popup {
+//   transform: translateY(20%);
+// }
+// .clipboard.active {
+//   opacity: 1;
+//   pointer-events: all;
+// }
+// .clipboard__popup.active {
+//   opacity: 1;
+//   transform: translateY(0%);
+//   pointer-events: all;
+// }
+// .library__popup {
+//   height: 70%;
+//   overflow: scroll;
+// }
+// .save.active {
+//   opacity: 1;
+//   pointer-events: all;
+// }
+// .save__popup.active {
+//   opacity: 1;
+//   pointer-events: all;
+// }
 
-@media (min-width: 560px) {
-  .save,
-  .clipboard {
-    &__popup {
-      width: 60%;
-      height: 40%;
-    }
-  }
-  .library__popup {
-    width: 70%;
-    height: 70%;
-  }
-}
+// .library.active {
+//   opacity: 1;
+//   pointer-events: all;
+// }
 
-@media (min-width: 1200px) {
-  .save,
-  .clipboard,
-  .library {
-    &__popup {
-      width: 80rem;
-      height: 50rem;
-    }
-  }
-}
+// .library__popup.active {
+//   opacity: 1;
+//   pointer-events: all;
+// }
 
-.library-palette {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-areas:
-    "header preview preview preview"
-    "pick pick remove remove";
-  gap: 1rem;
-  width: 85%;
-  margin: 1.5rem auto;
-  font-size: 2rem;
-  letter-spacing: 0.1rem;
-  &__header {
-    grid-area: header;
-    align-self: center;
-  }
-  &__pick-btn,
-  &__remove-btn {
-    font-size: 2.2rem;
-    cursor: pointer;
-    background-color: rgb(17, 27, 58);
-    border: none;
-    color: white;
-    pointer-events: all;
-  }
-  &__pick-btn {
-    grid-area: pick;
-  }
-  &__remove-btn {
-    grid-area: remove;
-  }
-  &__colors-preview {
-    @include flex(row, center, center);
-    height: 5rem;
-    grid-area: preview;
-  }
-  &__color {
-    min-width: 20%;
-    height: 100%;
-  }
-}
+// .fa-times,
+// .fa-trash-alt {
+//   pointer-events: none;
+// }
+
+// @media (min-width: 560px) {
+//   .save,
+//   .clipboard {
+//     &__popup {
+//       width: 60%;
+//       height: 40%;
+//     }
+//   }
+//   .library__popup {
+//     width: 70%;
+//     height: 70%;
+//   }
+// }
+
+// @media (min-width: 1200px) {
+//   .save,
+//   .clipboard,
+//   .library {
+//     &__popup {
+//       width: 80rem;
+//       height: 50rem;
+//     }
+//   }
+// }
+
+// .library-palette {
+//   display: grid;
+//   grid-template-columns: repeat(4, 1fr);
+//   grid-template-rows: repeat(2, 1fr);
+//   grid-template-areas:
+//     "header preview preview preview"
+//     "pick pick remove remove";
+//   gap: 1rem;
+//   width: 85%;
+//   margin: 1.5rem auto;
+//   font-size: 2rem;
+//   letter-spacing: 0.1rem;
+//   &__header {
+//     grid-area: header;
+//     align-self: center;
+//   }
+//   &__pick-btn,
+//   &__remove-btn {
+//     font-size: 2.2rem;
+//     cursor: pointer;
+//     background-color: rgb(17, 27, 58);
+//     border: none;
+//     color: white;
+//     pointer-events: all;
+//   }
+//   &__pick-btn {
+//     grid-area: pick;
+//   }
+//   &__remove-btn {
+//     grid-area: remove;
+//   }
+//   &__colors-preview {
+//     @include flex(row, center, center);
+//     height: 5rem;
+//     grid-area: preview;
+//   }
+//   &__color {
+//     min-width: 20%;
+//     height: 100%;
+//   }
+// }

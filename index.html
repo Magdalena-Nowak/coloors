@@ -5,140 +5,185 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./dist/css/style.css">
     <title>Coloors project</title>
 </head>
 
 <body>
-    <main>
-        <div class="colors">
-            <div class="colors__panel">
-                <h1 class="colors__panel-header"></h1>
-                <div class="colors__panel-controls">
-                    <button class="colors__panel-controls--adjust-btn"><i class="fas fa-sliders-h"></i></button>
-                    <button class="colors__panel-controls--lock-btn"><i
-                            class="colors__panel-controls--lock-icon fas fa-lock-open"></i></button>
+    <main class="container-fluid p-0">
+        <div class="colors row">
+            <div class="colors__panel col-12 col-md-6 col-lg-3">
+                <h3 class="colors__panel-header text-center"></h3>
+                <div class="colors__panel-controls text-center">
+                    <button class="colors__panel-controls--adjust-btn btn "><i class="fas fa-sliders-h"></i></button>
+                    <button class="colors__panel-controls--lock-btn btn "><i class=" fas fa-lock-open"></i></button>
                 </div>
-                <div class="colors__sliders">
-                    <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
-                    <h2>Hue</h2>
-                    <input class="sliders__hue-input" type="range" name="hue" min="0" max="360" step="1" data-hue="0">
-                    <h2>Brightness</h2>
-                    <input class="sliders__bright-input" type="range" name="brightness" min="0" max="1" step="0.01"
-                        data-bright="0">
-                    <h2>Saturation</h2>
-                    <input class="sliders__sat-input" type="range" name="saturation" min="0" max="1" step="0.01"
-                        data-sat="0">
-                </div>
-            </div>
-            <div class="colors__panel">
-                <h1 class="colors__panel-header"></h1>
-                <div class="colors__panel-controls">
-                    <button class="colors__panel-controls--adjust-btn"><i class="fas fa-sliders-h"></i></button>
-                    <button class="colors__panel-controls--lock-btn"><i
-                            class="colors__panel-controls--lock-icon fas fa-lock-open"></i></button>
-                </div>
-                <div class="colors__sliders">
-                    <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
-                    <h2>Hue</h2>
-                    <input class="sliders__hue-input" type="range" name="hue" min="0" max="360" step="1" data-hue="1">
-                    <h2>Brightness</h2>
-                    <input class="sliders__bright-input" type="range" name="brightness" min="0" max="1" step="0.01"
-                        data-bright="1">
-                    <h2>Saturation</h2>
-                    <input class="sliders__sat-input" type="range" name="saturation" min="0" max="1" step="0.01"
-                        data-sat="1">
+                <div class="colors__sliders bg-light">
+                    <button class="sliders__close-btn btn text-light"><i class="fas fa-times"></i></button>
+                    <div class="sliders__wrapper">
+                        <h4>Hue</h4>
+                        <input class="sliders__hue-input" type="range" name="hue" min="0" max="360" step="1"
+                            data-hue="0">
+                    </div>
+                    <div class="sliders__wrapper">
+                        <h4>Brightness</h4>
+                        <input class="sliders__bright-input" type="range" name="brightness" min="0" max="1" step="0.01"
+                            data-bright="0">
+                    </div>
+                    <div  class="sliders__wrapper">
+                        <h4>Saturation</h4>
+                        <input class="sliders__sat-input" type="range" name="saturation" min="0" max="1" step="0.01"
+                            data-sat="0">
+                    </div>
                 </div>
             </div>
-            <div class="colors__panel">
-                <h1 class="colors__panel-header"></h1>
-                <div class="colors__panel-controls">
-                    <button class="colors__panel-controls--adjust-btn"><i class="fas fa-sliders-h"></i></button>
-                    <button class="colors__panel-controls--lock-btn"><i
-                            class="colors__panel-controls--lock-icon fas fa-lock-open"></i></button>
+            <div class="colors__panel col-12 col-md-6 col-lg-3">
+                <h3 class="colors__panel-header text-center"></h3>
+                <div class="colors__panel-controls text-center">
+                    <button class="colors__panel-controls--adjust-btn btn "><i class="fas fa-sliders-h"></i></button>
+                    <button class="colors__panel-controls--lock-btn btn "><i class=" fas fa-lock-open"></i></button>
                 </div>
-                <div class="colors__sliders">
-                    <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
-                    <h2>Hue</h2>
-                    <input class="sliders__hue-input" type="range" name="hue" min="0" max="360" step="1" data-hue="2">
-                    <h2>Brightness</h2>
-                    <input class="sliders__bright-input" type="range" name="brightness" min="0" max="1" step="0.01"
-                        data-bright="2">
-                    <h2>Saturation</h2>
-                    <input class="sliders__sat-input" type="range" name="saturation" min="0" max="1" step="0.01"
-                        data-sat="2">
-                </div>
-            </div>
-            <div class="colors__panel">
-                <h1 class="colors__panel-header"></h1>
-                <div class="colors__panel-controls">
-                    <button class="colors__panel-controls--adjust-btn"><i class="fas fa-sliders-h"></i></button>
-                    <button class="colors__panel-controls--lock-btn"><i
-                            class="colors__panel-controls--lock-icon fas fa-lock-open"></i></button>
-                </div>
-                <div class="colors__sliders">
-                    <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
-                    <h2>Hue</h2>
-                    <input class="sliders__hue-input" type="range" name="hue" min="0" max="360" step="1" data-hue="3">
-                    <h2>Brightness</h2>
-                    <input class="sliders__bright-input" type="range" name="brightness" min="0" max="1" step="0.01"
-                        data-bright="3">
-                    <h2>Saturation</h2>
-                    <input class="sliders__sat-input" type="range" name="saturation" min="0" max="1" step="0.01"
-                        data-sat="3">
+                <div class="colors__sliders bg-light">
+                    <button class="sliders__close-btn btn text-light"><i class="fas fa-times"></i></button>
+                    <div class="sliders__wrapper">
+                        <h4>Hue</h4>
+                        <input class="sliders__hue-input" type="range" name="hue" min="0" max="360" step="1"
+                            data-hue="1">
+                    </div>
+                    <div class="sliders__wrapper">
+                        <h4>Brightness</h4>
+                        <input class="sliders__bright-input" type="range" name="brightness" min="0" max="1" step="0.01"
+                            data-bright="1">
+                    </div>
+                    <div  class="sliders__wrapper">
+                        <h4>Saturation</h4>
+                        <input class="sliders__sat-input" type="range" name="saturation" min="0" max="1" step="0.01"
+                            data-sat="1">
+                    </div>
                 </div>
             </div>
-            <div class="colors__panel">
-                <h1 class="colors__panel-header"></h1>
+            <div class="colors__panel col-12 col-md-6 col-lg-3">
+                <h3 class="colors__panel-header text-center"></h3>
+                <div class="colors__panel-controls text-center">
+                    <button class="colors__panel-controls--adjust-btn btn "><i class="fas fa-sliders-h"></i></button>
+                    <button class="colors__panel-controls--lock-btn btn "><i class=" fas fa-lock-open"></i></button>
+                </div>
+                <div class="colors__sliders bg-light">
+                    <button class="sliders__close-btn btn text-light"><i class="fas fa-times"></i></button>
+                    <div class="sliders__wrapper">
+                        <h4>Hue</h4>
+                        <input class="sliders__hue-input" type="range" name="hue" min="0" max="360" step="1"
+                            data-hue="2">
+                    </div>
+                    <div class="sliders__wrapper">
+                        <h4>Brightness</h4>
+                        <input class="sliders__bright-input" type="range" name="brightness" min="0" max="1" step="0.01"
+                            data-bright="2">
+                    </div>
+                    <div  class="sliders__wrapper">
+                        <h4>Saturation</h4>
+                        <input class="sliders__sat-input" type="range" name="saturation" min="0" max="1" step="0.01"
+                            data-sat="2">
+                    </div>
+                </div>
+            </div>
+            <div class="colors__panel col-12 col-md-6 col-lg-3">
+                <h3 class="colors__panel-header text-center"></h3>
+                <div class="colors__panel-controls text-center">
+                    <button class="colors__panel-controls--adjust-btn btn "><i class="fas fa-sliders-h"></i></button>
+                    <button class="colors__panel-controls--lock-btn btn "><i class=" fas fa-lock-open"></i></button>
+                </div>
+                <div class="colors__sliders bg-light">
+                    <button class="sliders__close-btn btn text-light"><i class="fas fa-times"></i></button>
+                    <div class="sliders__wrapper">
+                        <h4>Hue</h4>
+                        <input class="sliders__hue-input" type="range" name="hue" min="0" max="360" step="1"
+                            data-hue="3">
+                    </div>
+                    <div class="sliders__wrapper">
+                        <h4>Brightness</h4>
+                        <input class="sliders__bright-input" type="range" name="brightness" min="0" max="1" step="0.01"
+                            data-bright="3">
+                    </div>
+                    <div  class="sliders__wrapper">
+                        <h4>Saturation</h4>
+                        <input class="sliders__sat-input" type="range" name="saturation" min="0" max="1" step="0.01"
+                            data-sat="3">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="colors__panel col-12 col-md-6 col-xl-2">
+                <h3 class="colors__panel-header"></h3>
                 <div class="colors__panel-controls">
-                    <button class="colors__panel-controls--adjust-btn"><i class="fas fa-sliders-h"></i></button>
-                    <button class="colors__panel-controls--lock-btn"><i
-                            class="colors__panel-controls--lock-icon fas fa-lock-open"></i></button>
+                    <button class="colors__panel-controls--adjust-btn btn "><i class="fas fa-sliders-h"></i></button>
+                    <button class="colors__panel-controls--lock-btn btn "><i
+                            class=" fas fa-lock-open"></i></button>
                 </div>
                 <div class="colors__sliders">
                     <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
-                    <h2>Hue</h2>
+                    <h4>Hue</h4>
                     <input class="sliders__hue-input" type="range" name="hue" min="0" max="360" step="1" data-hue="4">
-                    <h2>Brightness</h2>
+                    <h4>Brightness</h4>
                     <input class="sliders__bright-input" type="range" name="brightness" min="0" max="1" step="0.01"
                         data-bright="4">
-                    <h2>Saturation</h2>
+                    <h4>Saturation</h4>
                     <input class="sliders__sat-input" type="range" name="saturation" min="0" max="1" step="0.01"
                         data-sat="4">
                 </div>
-            </div>
+            </div> -->
+            <!-- <div class="colors__panel col-12 col-md-6 col-xl-2">
+                <h3 class="colors__panel-header"></h3>
+                <div class="colors__panel-controls">
+                    <button class="colors__panel-controls--adjust-btn btn "><i class="fas fa-sliders-h"></i></button>
+                    <button class="colors__panel-controls--lock-btn btn "><i
+                            class=" fas fa-lock-open"></i></button>
+                </div>
+                <div class="colors__sliders">
+                    <button class="sliders__close-btn"><i class="fas fa-times"></i></button>
+                    <h4>Hue</h4>
+                    <input class="sliders__hue-input" type="range" name="hue" min="0" max="360" step="1" data-hue="4">
+                    <h4>Brightness</h4>
+                    <input class="sliders__bright-input" type="range" name="brightness" min="0" max="1" step="0.01"
+                        data-bright="4">
+                    <h4>Saturation</h4>
+                    <input class="sliders__sat-input" type="range" name="saturation" min="0" max="1" step="0.01"
+                        data-sat="4">
+                </div>
+            </div> -->
         </div>
         <div class="options">
             <div class="options__library">
                 <button class="options__library-btn"><i class="fas fa-book-open"></i></button>
-                <h2 class="options__library-header">Library</h2>
+                <h4 class="options__library-header">Library</h4>
             </div>
             <div class="options__refresh">
                 <button class="options__refresh-btn"><i class="fas fa-sync"></i></button>
-                <h2 class="options__refresh-header">Refresh</h2>
+                <h4 class="options__refresh-header">Refresh</h4>
             </div>
             <div class="options__save">
                 <button class="options__save-btn"><i class="fas fa-save"></i></button>
-                <h2 class="options__save-header">Save</h2>
+                <h4 class="options__save-header">Save</h4>
             </div>
         </div>
         <div class="library">
             <div class="library__popup">
                 <button class="library__popup-close-btn"><i class="fas fa-times"></i></button>
-                <h2 class="library__popup-header">Pick your palette</h2>
+                <h4 class="library__popup-header">Pick your palette</h4>
             </div>
         </div>
         <div class="clipboard">
             <div class="clipboard__popup">
-                <h2 class="clipboard__popup-header">Copied to clipboard!</h2>
+                <h4 class="clipboard__popup-header">Copied to clipboard!</h4>
                 <h3 class="clipboard__popup-icon"><i class="far fa-thumbs-up"></i></h3>
             </div>
         </div>
         <div class="save">
             <div class="save__popup">
                 <button class="save__popup-close-btn"><i class="fas fa-times"></i></button>
-                <h2 class="save__popup-header">Give a name to your palette!</h2>
+                <h4 class="save__popup-header">Give a name to your palette!</h4>
                 <input class="save__popup-name" type="text" max="30">
                 <button class="save__popup-save-btn">Save</button>
             </div>
